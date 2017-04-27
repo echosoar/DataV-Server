@@ -49,7 +49,9 @@ $data['data'] = array();
 
 try {
   foreach($queryRes as $row ) {
-    $data['data'][] = $row['json'];
+    $temData['json'] = $row['json'];
+    $temData['id'] = $row['id'];
+    $data['data'][] = $temData;
   }
 }catch(PDOException $e) {
   base_response(false,'', '数据库读取错误');
