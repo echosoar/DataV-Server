@@ -2,7 +2,7 @@
 require('./data.php');
 require('./base.php');
 
-$table = '';
+$table = 'pages';
 $name = '';
 $page = 1;
 $size = 10;
@@ -10,7 +10,6 @@ $start = 0;
 $selName = '';
 
 try {
-  $req_table = $_GET['table'];
   $name = addslashes(stripslashes($_GET['name']));
   $page = $_GET['page'] - 0;
   $size = $_GET['size'] - 0;
@@ -20,17 +19,6 @@ try {
 }
 
 
-switch($req_table) {
-  case 'layoutTemplate':
-  case 'baseModule':
-  case 'dataModule':
-    $table = $req_table;
-    break;
-  default:
-    base_response(false,'', '接口配置错误：table设置错误');
-    exit;
-    break;
-}
 
 if($name!='') {
   $selName = " where name like '%".$name."%'";
@@ -50,6 +38,9 @@ $data['data'] = array();
 try {
   foreach($queryRes as $row ) {
     $temData['json'] = stripslashes($row['json']);
+    $temData['createTime'] = $row['createTime'];
+    $temData['name'] = $row['name'];
+    $temData['description'] = $row['description'];
     $temData['id'] = $row['id'];
     $data['data'][] = $temData;
   }

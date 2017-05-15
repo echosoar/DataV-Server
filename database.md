@@ -23,3 +23,12 @@ create table dataModule (
   description text,
   createTime varchar(13)
 );
+
+
+create table pages (
+  id int auto_increment primary key,
+  json text,
+  name text,
+  description text,
+  createTime varchar(13)
+)
