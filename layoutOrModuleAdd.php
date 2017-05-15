@@ -25,7 +25,8 @@ try {
 		break;
 	}
   
-  $req_data = json_decode(stripslashes($_POST['data']));
+  $postTrans = str_replace("#DataVSlashFormat#", '\\',stripslashes($_POST['data']));
+  $req_data = json_decode($postTrans);
   $name = addslashes($req_data->name);
   $description = addslashes($req_data->introduction);
   
